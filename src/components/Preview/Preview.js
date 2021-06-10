@@ -38,6 +38,7 @@ export default class extends Component {
           theme={theme}
           wrapperId={editorWrapperId}
           processWithCloudimage={processWithCloudimage}
+          watermarkDraggingEnabled={watermark.draggingEnabled ?? true}
         />}
 
         {activeTab === 'focus_point' && (

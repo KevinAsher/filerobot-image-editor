@@ -5,7 +5,7 @@ import FilerobotImageEditor from '../../../src';
 
 const App = () => {
   const src = 'https://cdn.scaleflex.it/demo/stephen-walker-unsplash.jpg';
-  const [show, toggle] = useState(false);
+  const [show, toggle] = useState(true);
 
 
   return (
@@ -16,11 +16,24 @@ const App = () => {
 
       <FilerobotImageEditor
         show={show}
+	      config={{ 
+          watermark: {
+            showImageInputControls: false, 
+            url: 'https://i.imgur.com/fHyEMsl.jpg', 
+            lockScaleToPercentage: 100, 
+            // activePositions: 'corners',
+            draggingEnabled: false,
+          }, 
+          tools: ['watermark'],
+          showCloseButton: false,
+          keepOpen: true,
+        }}
         src={src}
-        onClose={() => { toggle(false) }}
+        showInModal={false}
+        onClose={() => { toggle(false); }}
         onOpen={() => console.log('Editor is opened.')}
         onComplete={(props) => { console.log(props) }}
-        onBeforeComplete={(props) => { console.log(props); return false; }}
+        onBeforeComplete={(props) => { console.log(props.state.watermark); }}
       />
     </div>
   )

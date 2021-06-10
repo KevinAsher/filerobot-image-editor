@@ -1,5 +1,3 @@
-import '../../../src/connectors/js/index';
-
 
 const buttonEditDownload = document.getElementById('edit-btn-download');
 const buttonEditUpload = document.getElementById('edit-btn-upload');

@@ -48,6 +48,7 @@ class FilerobotImageEditor {
     this.component = renderApp(ImageEditor);
     this.open = this.component.open;
     this.close = this.component.close;
+    this.getCustomizationData = this.component.getCustomizationData;
     this.unmount = () => unmountComponentAtNode(container);
   }
 }

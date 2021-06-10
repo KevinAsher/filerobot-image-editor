@@ -29,7 +29,7 @@ import { getWatermarkSquaredPosition, getCanvasNode } from '../../utils';
 export default class extends Component {
   constructor(props) {
     super(props);
-    const { opacity, position, url, applyByDefault, activePositions, handleOpacity } = props.watermark;
+    const { opacity, position, url, applyByDefault, activePositions, handleOpacity, showImageInputControls=true } = props.watermark;
     let { urls, fonts } = props.watermark;
 
     let setActivePositions = [];
@@ -82,6 +82,7 @@ export default class extends Component {
       isWatermarkList: urls && urls.length > 1,
       applyByDefault: applyByDefault || false,
       showWaterMarkList: false,
+      showImageInputControls: showImageInputControls,
       selectedInputType: urls && urls.length > 1 ? 'gallery' : 'text',
       text: '',
       color: '#000000',
@@ -340,6 +341,7 @@ export default class extends Component {
       activePositions,
       applyByDefault,
       showWaterMarkList,
+      showImageInputControls,
       selectedInputType,
       text,
       color,
@@ -357,7 +359,8 @@ export default class extends Component {
     return (
       <WatermarkWrapper>
 
-        <WatermarkInputTypes>
+      { showImageInputControls &&
+	      <WatermarkInputTypes>
           <label>
             {t['common.gallery']}
             <input
@@ -397,8 +400,10 @@ export default class extends Component {
             <span/>
           </label>
         </WatermarkInputTypes>
+      }
 
         <WatermarkInputs>
+      	{ showImageInputControls &&
           <WrapperForURL>
             {galleryInput && (<>
               <label htmlFor="url">Watermark Gallery</label>
@@ -462,10 +467,11 @@ export default class extends Component {
               />
             </>)}
           </WrapperForURL>
-          <WrapperForControls switcherPosition={handleOpacity ? 'right' : 'left'}>
+	      }
+	        <WrapperForControls switcherPosition={handleOpacity ? 'right' : 'left'}>
             {handleOpacity &&
             <WrapperForOpacity>
-              <label htmlFor="opacity" style={{ minWidth: 80 }}>Opacity</label>
+              <label htmlFor="opacity" style={{ minWidth: 80 }}>{t['common.opacity']}</label>
               <Range
                 label={t['common.opacity']}
                 min={0}

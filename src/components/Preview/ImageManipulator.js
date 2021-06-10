@@ -1181,14 +1181,14 @@ export default class ImageManipulator extends Component {
     const { updateState, shapeOperations } = this.props;
     const watermarkLayer = (shapeOperations.getShape({ key: WATERMARK_UNIQUE_KEY }) || {}).index;
 
-    this.setState({ tempWatermark: null });
-    updateState({ selectedShape: {} });
-    this.makeCanvasSnapshot({
-      operation: 'shape',
-      props: {
-        shapes: [watermarkLayer]
-      }
-    }, callback, true);
+    // this.setState({ tempWatermark: null });
+    // updateState({ selectedShape: {} });
+    // this.makeCanvasSnapshot({
+    //   operation: 'shape',
+    //   props: {
+    //     shapes: [watermarkLayer]
+    //   }
+    // }, callback, true);
     callback();
   }
 

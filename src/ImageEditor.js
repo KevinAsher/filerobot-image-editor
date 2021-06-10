@@ -242,10 +242,11 @@ export default class extends Component {
   onDownloadImage = () => {
     const { onBeforeComplete } = this.props;
     const { downloadImage, getResultCanvas, imageMime, imageName } = this.state;
-    const canvas = getResultCanvas();
+    // const canvas = getResultCanvas();
+    const canvas = null;
     const returnedImgObject = { imageMime, imageName, canvas }
     const isDownload = onBeforeComplete
-      ? onBeforeComplete({ status: 'before-complete', ...returnedImgObject })
+      ? onBeforeComplete({ status: 'before-complete', ...returnedImgObject, state: this.state })
       : true;
 
     if (isDownload) {
@@ -301,11 +302,15 @@ export default class extends Component {
     }
   }
 
+  getCustomizationData = () => {
+    return this.state;
+  }
+
   apply = (callback) => {
     const { activeTab, applyChanges } = this.state;
 
     applyChanges(activeTab, callback);
-    this.setState({ activeTab: null });
+    // this.setState({ activeTab: null });
   }
 
   redoOperation = ({ operationIndex, callback = () => {}, resetActiveTab = true, operationObject = {} }) => {
@@ -517,7 +522,7 @@ export default class extends Component {
 
           <Spinner overlay show={isShowSpinner} label={t['spinner.label']}/>
         </PreviewWrapper>
-        <Footer {...footerProps}/>
+        {/* <Footer {...footerProps}/> */}
 
       </Wrapper>
     )

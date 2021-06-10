@@ -1,4 +1,4 @@
-import { Component } from 'react';
+import { Component, createRef } from 'react';
 import ImageEditor from './ImageEditor';
 import { Container } from './styledComponents';
 import { ThemeProvider } from 'styled-components';
@@ -25,6 +25,8 @@ class ImageEditorWrapper extends Component {
     config.colorScheme = config.colorScheme || 'dark';
     config.platform = config.platform || 'filerobot';
     const isCustomColorScheme = typeof config.colorScheme === 'object';
+
+    this.ImageEditorRef = createRef();
 
     this.state = {
       isVisible: show,
@@ -93,11 +95,15 @@ class ImageEditorWrapper extends Component {
     const { onClose } = this.props;
     const status = typeof closingStatus === 'object' ? ON_CLOSE_STATUSES.CLOSE_BTN_CLICKED : closingStatus;
 
-    if (this._isMounted) {
+    if (this._isMounted && !this.state.config?.keepOpen) {
       this.setState({ isVisible: false }, () => {
         if (onClose) onClose({ status });
       });
     }
+  }
+
+  getCustomizationData = () => {
+    return this.ImageEditorRef.current.getCustomizationData();
   }
 
   render() {
@@ -112,6 +118,7 @@ class ImageEditorWrapper extends Component {
     const Inner = (
       <Container>
         <ImageEditor
+          ref={this.ImageEditorRef}
           src={src}
           config={config}
           onComplete={onComplete}

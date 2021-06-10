@@ -190,11 +190,14 @@ export default class CustomizedCanvas extends Component {
             });
 
             this.activateResizingActions();
-            this._canvas.addEventListener('keyup', this.activateShapeDeleting);
-            this._canvas.addEventListener('mousemove', this.startDragging);
-            this._canvas.addEventListener('touchmove', this.startDragging);
-            document.addEventListener('mouseup', this.endDragging);
-            document.addEventListener('touchend', this.endDragging);
+            if (this.props.watermarkDraggingEnabled) {
+              this._canvas.addEventListener('keyup', this.activateShapeDeleting);
+              this._canvas.addEventListener('mousemove', this.startDragging);
+              this._canvas.addEventListener('touchmove', this.startDragging);
+              document.addEventListener('mouseup', this.endDragging);
+              document.addEventListener('touchend', this.endDragging);
+            }
+            
           }
       }
     );
@@ -204,10 +207,12 @@ export default class CustomizedCanvas extends Component {
       this.updateState({ selectedShape: {} });
       this.disableResizingActions();
       this._canvas.removeEventListener('keyup', this.activateShapeDeleting);
-      this._canvas.removeEventListener('mousemove', this.startDragging);
-      this._canvas.removeEventListener('touchmove', this.startDragging);
-      document.removeEventListener('mouseup', this.endDragging);
-      document.removeEventListener('touchend', this.endDragging);
+      if (this.props.watermarkDraggingEnabled) {
+        this._canvas.removeEventListener('mousemove', this.startDragging);
+        this._canvas.removeEventListener('touchmove', this.startDragging);
+        document.removeEventListener('mouseup', this.endDragging);
+        document.removeEventListener('touchend', this.endDragging);
+      }
     }
   }
 
