@@ -1,7 +1,7 @@
 export const getWatermarkSquaredPosition = (position = 'center', canvas, width, height) => {
   const canvasRect = canvas.getBoundingClientRect();
 
-  const scaleRatio = 30 / 100; // 30%
+  const scaleRatio = 15 / 100; // 15%
 
   const scaledHeight = canvasRect.height * scaleRatio;
   const scaledWidth = canvasRect.width * scaleRatio;
